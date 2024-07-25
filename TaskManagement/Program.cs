@@ -14,6 +14,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<DataProvider>();
 builder.Services.AddScoped<ITaskManager, TaskManager>();
+builder.Services.AddCors(p =>
+{
+    p.AddPolicy("ReactApp", b =>
+    {
+        b.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    });
+ });
 
 var app = builder.Build();
 
@@ -24,6 +33,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("ReactApp");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

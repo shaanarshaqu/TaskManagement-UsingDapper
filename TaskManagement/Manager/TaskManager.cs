@@ -52,6 +52,8 @@ namespace TaskManagement.Manager
             {
                 Tasks convertedtask = mapper.Map<Tasks>(tasksDto);
                 convertedtask.Id = Guid.NewGuid().ToString();
+                convertedtask.CreatedAt = DateTime.Now;
+                convertedtask.UpdatedAt = DateTime.Now;
                 int rowEffected = await dataProvider.IncertAsync(Constants.Tables.Tasks.ToString(), convertedtask);
                 return rowEffected > 0;
             }
