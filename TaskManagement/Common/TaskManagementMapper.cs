@@ -9,6 +9,8 @@ namespace TaskManagement.Common
         public TaskManagementMapper() 
         {
             CreateMap<TasksDto, Tasks>();
+            CreateMap<UserLoginDto, Users>();
+            CreateMap<UsersDto, Users>();
         }
     }
 }

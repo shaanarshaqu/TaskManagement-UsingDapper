@@ -19,16 +19,16 @@ namespace TaskManagement.Manager
 
 
 
-        public async Task<IEnumerable<Tasks>> GetAllTask()
+        public async Task<IEnumerable<Tasks>> GetAllTask(string id)
         {
             try
             {
-                IEnumerable<Tasks> AllTasks = await dataProvider.GetAllAsync<Tasks>(Constants.Tables.Tasks.ToString());
+                IEnumerable<Tasks> AllTasks = await dataProvider.GetAllByCondition<Tasks>(Constants.Tables.Tasks.ToString(),new Tasks { user_id=id});
                 return AllTasks;
             }
             catch (Exception ex)
             {
-                throw new Exception("Something Went Wrong");
+                throw new Exception(ex.Message);
             }
         }
 

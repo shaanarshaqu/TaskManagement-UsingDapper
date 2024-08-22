@@ -9,11 +9,16 @@
         public const string Insert = "INSERT INTO {0}({1}) VALUES({2})";
         public const string UpdateById = "UPDATE {0} SET {1} WHERE Id=@Id";
         public const string DeleteById = "DELETE FROM {0} WHERE Id=@Id";
+        public const string GetAllByCondition = "SELECT * FROM {0} WHERE {1}";
+
+
+        public const string secret = "shbfsinsdv78shfns8?sdhjshdnvskjdnvssdvsdv";
 
 
         public enum Tables
         {
-            Tasks
+            Tasks,
+            Users
         }
     }
 }

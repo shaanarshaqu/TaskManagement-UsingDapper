@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TaskManagement.Data.DTO;
 using TaskManagement.Data.Models;
 using TaskManagement.Manager.Interface;
@@ -17,12 +16,12 @@ namespace TaskManagement.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllTasks()
+        [HttpGet("All/{userid}")]
+        public async Task<IActionResult> GetAllTasks(string userid)
         {
             try
             {
-                IEnumerable<Tasks> AllTasks = await taskManager.GetAllTask();
+                IEnumerable<Tasks> AllTasks = await taskManager.GetAllTask(userid);
                 return Ok(AllTasks);
             }
             catch (Exception ex)

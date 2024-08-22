@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using System.Data.SqlClient;
 using System.Reflection;
-using System.Text;
 using TaskManagement.Common;
 
 namespace TaskManagement.Data
@@ -25,6 +24,15 @@ namespace TaskManagement.Data
         {
                 string query = string.Format(Constants.GetById, tableName);
                 return await connection.QueryFirstOrDefaultAsync<T>(query, new { Id = id });
+        }
+
+
+        public async Task<IEnumerable<T>> GetAllByCondition<T>(string tableName, T entity)
+        {
+            PropertyInfo[] properties = typeof(T).GetProperties();
+            string conditions = string.Join(" AND ", properties.Where(p => p.GetValue(entity) != null).Select(p => $"{p.Name} = @{p.Name}"));
+            string query = string.Format(Constants.GetAllByCondition, tableName, conditions);
+            return await connection.QueryAsync<T>(query, entity);
         }
 
         public async Task<int> IncertAsync<T>(string tableName, T entity)
